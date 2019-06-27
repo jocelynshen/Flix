@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flixter.models.Config;
 import com.example.flixter.models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.example.flixter.models.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -115,6 +115,10 @@ public class MovieListActivity extends AppCompatActivity {
                 logErrorMethod("Failed getting configuration", throwable, true);
             }
         });
+    }
+
+    private void setupListViewListener(){
+
     }
 
     private void logErrorMethod(String message, Throwable error, boolean alertUser){
