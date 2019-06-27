@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:background="#FF161618">
 
     <ImageView
         android:id="@+id/ivBackdropImage"
@@ -28,11 +29,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Movier Title"
+        android:text="Movie Title"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#CACACA"
         app:layout_constraintStart_toEndOf="@+id/ivBackdropImage"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="8dp" />
 
     <TextView
         android:id="@+id/tvOverview"
@@ -43,7 +44,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:fontFamily="sans-serif-condensed-light"
         android:text="TextView"
+        android:textColor="#CACACA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivBackdropImage"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />

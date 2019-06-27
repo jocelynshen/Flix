@@ -48,6 +48,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             ivPosterImage = itemView.findViewById(R.id.ivPosterImage);
             ivBackdropImage = itemView.findViewById(R.id.ivBackdropImage);
             tvTitle = itemView.findViewById(R.id.tvTitle);
