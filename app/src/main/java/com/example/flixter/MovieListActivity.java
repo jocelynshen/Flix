@@ -48,6 +48,7 @@ public class MovieListActivity extends AppCompatActivity {
         rvMovies = findViewById(R.id.rvMovies);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
+        System.out.println(movies);
         getConfiguration();
 
     }
@@ -70,6 +71,7 @@ public class MovieListActivity extends AppCompatActivity {
                         movies.add(movie);
                         adapter.notifyItemInserted(movies.size()-1);
                     }
+                    System.out.println(movies);
                     Log.i(TAG, String.format("Loaded %s movies", results.length()));
                 } catch (JSONException e) {
                     logErrorMethod("Failed to parse now playing movies", e, true);
