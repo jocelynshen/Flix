@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/ivPosterImage"
-        android:layout_width="122dp"
-        android:layout_height="181dp"
+        android:layout_width="110dp"
+        android:layout_height="173dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

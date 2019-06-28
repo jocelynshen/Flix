@@ -25,7 +25,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     ArrayList<Movie> movies;
     Config config;
-    Context context;
+    public static Context context;
 
     public Config getConfig() {
         return config;
@@ -67,6 +67,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 Movie movie = movies.get(position);
                 Intent intent = new Intent(context, MovieDetailsActivity.class);
                 intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
+                intent.putExtra("imageUrl",  config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath()));
+                intent.putExtra("id", movie.getId());
                 context.startActivity(intent);
             }
 

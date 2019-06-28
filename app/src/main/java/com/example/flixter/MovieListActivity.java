@@ -32,7 +32,6 @@ public class MovieListActivity extends AppCompatActivity {
 
     AsyncHttpClient client;
     ArrayList<Movie> movies;
-    ArrayList<Movie> trailers;
     RecyclerView rvMovies;
     MovieAdapter adapter;
     Config config;
@@ -72,7 +71,6 @@ public class MovieListActivity extends AppCompatActivity {
                         movies.add(movie);
                         adapter.notifyItemInserted(movies.size()-1);
                     }
-                    System.out.println(movies);
                     Log.i(TAG, String.format("Loaded %s movies", results.length()));
                 } catch (JSONException e) {
                     logErrorMethod("Failed to parse now playing movies", e, true);
@@ -118,9 +116,6 @@ public class MovieListActivity extends AppCompatActivity {
         });
     }
 
-    private void setupListViewListener(){
-
-    }
 
     private void logErrorMethod(String message, Throwable error, boolean alertUser){
         // always log error

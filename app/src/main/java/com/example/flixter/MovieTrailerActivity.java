@@ -1,24 +1,71 @@
 package com.example.flixter;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 public class MovieTrailerActivity extends YouTubeBaseActivity {
+    public final static String API_BASE_URL = "https://api.themoviedb.org/3";
+    public final static String API_KEY_PARAM = "api_key";
+    public final static String TAG = "MovieTrailerActivity";
+    AsyncHttpClient client;
+    String videoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_trailer);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        client = new AsyncHttpClient();
+        getMovieTrailer();
+    }
 
-        // temporary test video id -- TODO replace with movie trailer video id
-        final String videoId = "tKodtNFpzBA";
+    private void getMovieTrailer(){
+        // create url
+        int movieId = getIntent().getExtras().getInt("id");
+        String url = API_BASE_URL + "/movie/" + movieId + "/videos";
+        // set request parameters
+        RequestParams params = new RequestParams();
+        params.put(API_KEY_PARAM, getString(R.string.api_key));
+        client.get(url, params, new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    JSONArray results = response.getJSONArray("results");
+                    JSONObject firstTrailer = (JSONObject) results.get(0);
+                    videoId = firstTrailer.getString("key");
+                    playVideo();
+                } catch (JSONException e) {
+                    logErrorMethod("Failed to get Youtube trailer", e, true);
+                }
+            }
 
-        // resolve the player view from the layout
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                logErrorMethod("Failed to get YouTube trailer", throwable, true);
+            }
+        });
+    }
+
+    private void playVideo(){
         YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.player);
 
         // initialize with API key stored in secrets.xml
@@ -27,6 +74,8 @@ public class MovieTrailerActivity extends YouTubeBaseActivity {
             public void onInitializationSuccess(YouTubePlayer.Provider provider,
                                                 YouTubePlayer youTubePlayer, boolean b) {
                 // do any work here to cue video, play video, etc.
+                System.out.println("VIDEO ID");
+                System.out.println(videoId);
                 youTubePlayer.cueVideo(videoId);
             }
 
@@ -37,8 +86,18 @@ public class MovieTrailerActivity extends YouTubeBaseActivity {
                 Log.e("MovieTrailerActivity", "Error initializing YouTube player");
             }
         });
+    }
+
+    private void logErrorMethod(String message, Throwable error, boolean alertUser){
+        // always log error
+        Log.e(TAG, message, error);
+        if (alertUser){
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        }
 
     }
+
+
 
 
 }

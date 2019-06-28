@@ -12,7 +12,7 @@ public class Movie {
     public String posterPath; // only path not full URL
     public String backdropPath;
     Double voteAverage;
-    public static Integer id;
+    Integer id;
 
     public Movie() {}
 
@@ -46,7 +46,7 @@ public class Movie {
         return voteAverage;
     }
 
-    public static Integer getId() {
+    public Integer getId() {
         return id;
     }
 }
