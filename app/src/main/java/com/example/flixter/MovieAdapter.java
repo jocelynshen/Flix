@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +21,8 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
@@ -41,22 +44,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-//        @BindView(R.id.tvTitle) TextView tvTitle;
-//        @BindView(R.id.tvOverview) TextView tvOverview;
-//        @BindView(R.id.ivBackdropImage) ImageView ivBackdropImage;
-//        @BindView(R.id.ivPosterImage) ImageView ivPosterImage;
-        ImageView ivPosterImage;
-        ImageView ivBackdropImage;
-        TextView tvTitle;
-        TextView tvOverview;
+        @BindView(R.id.tvTitle) TextView tvTitle;
+        @BindView(R.id.tvOverview) TextView tvOverview;
+        @Nullable @BindView(R.id.ivBackdropImage) ImageView ivBackdropImage;
+        @Nullable @BindView(R.id.ivPosterImage) ImageView ivPosterImage;
+//        ImageView ivPosterImage;
+//        ImageView ivBackdropImage;
+//        TextView tvTitle;
+//        TextView tvOverview;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivPosterImage = itemView.findViewById(R.id.ivPosterImage);
-            ivBackdropImage = itemView.findViewById(R.id.ivBackdropImage);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvOverview = itemView.findViewById(R.id.tvOverview);
+//            ivPosterImage = itemView.findViewById(R.id.ivPosterImage);
+//            ivBackdropImage = itemView.findViewById(R.id.ivBackdropImage);
+//            tvTitle = itemView.findViewById(R.id.tvTitle);
+//            tvOverview = itemView.findViewById(R.id.tvOverview);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 

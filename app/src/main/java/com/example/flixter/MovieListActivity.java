@@ -45,6 +45,7 @@ public class MovieListActivity extends AppCompatActivity {
         client = new AsyncHttpClient();
         movies = new ArrayList<>();
         adapter = new MovieAdapter(movies);
+
         rvMovies = findViewById(R.id.rvMovies);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
