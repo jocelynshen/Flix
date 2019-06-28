@@ -41,6 +41,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+//        @BindView(R.id.tvTitle) TextView tvTitle;
+//        @BindView(R.id.tvOverview) TextView tvOverview;
+//        @BindView(R.id.ivBackdropImage) ImageView ivBackdropImage;
+//        @BindView(R.id.ivPosterImage) ImageView ivPosterImage;
         ImageView ivPosterImage;
         ImageView ivBackdropImage;
         TextView tvTitle;

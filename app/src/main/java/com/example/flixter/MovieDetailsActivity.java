@@ -1,7 +1,9 @@
 package com.example.flixter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -34,5 +36,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
         float voteAverage = movie.getVoteAverage().floatValue();
         rbVoteAverage.setRating(voteAverage = voteAverage > 0 ? voteAverage / 2.0f : voteAverage);
 
+
     }
+
+    public void getTrailer(View v) {
+        Intent i = new Intent(MovieDetailsActivity.this, MovieTrailerActivity.class);
+        startActivityForResult(i, 20);
+    }
+
 }

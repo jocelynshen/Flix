@@ -32,6 +32,7 @@ public class MovieListActivity extends AppCompatActivity {
 
     AsyncHttpClient client;
     ArrayList<Movie> movies;
+    ArrayList<Movie> trailers;
     RecyclerView rvMovies;
     MovieAdapter adapter;
     Config config;
