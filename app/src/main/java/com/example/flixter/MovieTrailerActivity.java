@@ -96,8 +96,4 @@ public class MovieTrailerActivity extends YouTubeBaseActivity {
         }
 
     }
-
-
-
-
 }

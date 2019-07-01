@@ -48,18 +48,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         @BindView(R.id.tvOverview) TextView tvOverview;
         @Nullable @BindView(R.id.ivBackdropImage) ImageView ivBackdropImage;
         @Nullable @BindView(R.id.ivPosterImage) ImageView ivPosterImage;
-//        ImageView ivPosterImage;
-//        ImageView ivBackdropImage;
-//        TextView tvTitle;
-//        TextView tvOverview;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-//            ivPosterImage = itemView.findViewById(R.id.ivPosterImage);
-//            ivBackdropImage = itemView.findViewById(R.id.ivBackdropImage);
-//            tvTitle = itemView.findViewById(R.id.tvTitle);
-//            tvOverview = itemView.findViewById(R.id.tvOverview);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
@@ -75,11 +66,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 intent.putExtra("id", movie.getId());
                 context.startActivity(intent);
             }
-
         }
     }
 
-    // creates and inflates a new view
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -89,7 +78,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         return new ViewHolder(movieView);
     }
 
-    // binds an inflated view to a new item
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Movie movie = movies.get(position);
@@ -102,7 +90,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         } else {
             imageUrl = config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath());
         }
-
         int placeholderId = isPortrait ? R.drawable.flicks_movie_placeholder: R.drawable.flicks_backdrop_placeholder;
         ImageView imageView = isPortrait ? holder.ivPosterImage: holder.ivBackdropImage;
         Glide.with(context)
@@ -111,10 +98,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 .placeholder(placeholderId)
                 .error(placeholderId)
                 .into(imageView);
-
     }
 
-    // returns total number of items in list
     @Override
     public int getItemCount() {
         return movies.size();

@@ -6,17 +6,15 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Movie {
-    // values from API
     public String title;
     public String overview;
-    public String posterPath; // only path not full URL
+    public String posterPath;
     public String backdropPath;
     Double voteAverage;
     Integer id;
 
     public Movie() {}
 
-    // initialize from JSON data
     public Movie(JSONObject object) throws JSONException {
         title = object.getString("title");
         overview = object.getString("overview");

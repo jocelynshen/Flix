@@ -24,10 +24,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class MovieListActivity extends AppCompatActivity {
 
-    //constants
     public final static String API_BASE_URL = "https://api.themoviedb.org/3";
     public final static String API_KEY_PARAM = "api_key";
-    // tag for logging
     public final static String TAG = "MovieListActivity";
 
     AsyncHttpClient client;
@@ -40,12 +38,10 @@ public class MovieListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // initialize the client
         client = new AsyncHttpClient();
         movies = new ArrayList<>();
         adapter = new MovieAdapter(movies);
-
         rvMovies = findViewById(R.id.rvMovies);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
@@ -54,11 +50,8 @@ public class MovieListActivity extends AppCompatActivity {
 
     }
 
-    // get the list of current movies
     private void getNowPlaying(){
-        // create url
         String url = API_BASE_URL + "/movie/now_playing";
-        // set request parameters
         RequestParams params = new RequestParams();
         params.put(API_KEY_PARAM, getString(R.string.api_key));
         client.get(url, params, new JsonHttpResponseHandler(){
@@ -106,7 +99,6 @@ public class MovieListActivity extends AppCompatActivity {
                 catch (JSONException e){
                     logErrorMethod("Failed parsing configuration", e, true);
                 }
-
             }
 
             @Override
@@ -116,7 +108,6 @@ public class MovieListActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void logErrorMethod(String message, Throwable error, boolean alertUser){
         // always log error
