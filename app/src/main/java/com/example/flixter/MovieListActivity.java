@@ -38,19 +38,19 @@ public class MovieListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // initialize the client
         client = new AsyncHttpClient();
         movies = new ArrayList<>();
         adapter = new MovieAdapter(movies);
         rvMovies = findViewById(R.id.rvMovies);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
-        System.out.println(movies);
         getConfiguration();
-
     }
 
     private void getNowPlaying(){
+        /*
+        Grabs currently playing movies from API
+         */
         String url = API_BASE_URL + "/movie/now_playing";
         RequestParams params = new RequestParams();
         params.put(API_KEY_PARAM, getString(R.string.api_key));
@@ -80,12 +80,9 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     private void getConfiguration(){
-        // create url
         String url = API_BASE_URL + "/configuration";
-        // set request parameters
         RequestParams params = new RequestParams();
         params.put(API_KEY_PARAM, getString(R.string.api_key));
-        // execute GET request
         client.get(url, params, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -110,7 +107,9 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     private void logErrorMethod(String message, Throwable error, boolean alertUser){
-        // always log error
+        /*
+        Log any errors
+         */
         Log.e(TAG, message, error);
         if (alertUser){
             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();

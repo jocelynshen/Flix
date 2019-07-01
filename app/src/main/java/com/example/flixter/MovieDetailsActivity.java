@@ -23,27 +23,28 @@ public class MovieDetailsActivity extends AppCompatActivity {
     TextView tvTitle;
     TextView tvOverview;
     RatingBar rbVoteAverage;
-    public final static String ID = "ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
-        movie = Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
+        movie = Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName())); // grab movie object parcel
         Log.d("MovieDetailsActivity", String.format("Showing details for '%s'", movie.getTitle()));
 
+        // set all text
         tvTitle = findViewById(R.id.tvTitle);
-        tvOverview = findViewById(R.id.tvOverview);
-        rbVoteAverage = findViewById(R.id.rbVoteAverage);
-
         tvTitle.setText(movie.getTitle());
+        tvOverview = findViewById(R.id.tvOverview);
         tvOverview.setText(movie.getOverview());
 
+        // set ratings bar
+        rbVoteAverage = findViewById(R.id.rbVoteAverage);
         float voteAverage = movie.getVoteAverage().floatValue();
         rbVoteAverage.setRating(voteAverage = voteAverage > 0 ? voteAverage / 2.0f : voteAverage);
+
+        // set movie poster image
         String imageUrl = getIntent().getExtras().getString("imageUrl");
         ImageView iv = findViewById(R.id.ivBackdropImage);
-
         Context context = MovieAdapter.context;
         Glide.with(context)
                 .load(imageUrl)
@@ -53,6 +54,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
     }
 
     public void getTrailer(View v) {
+        /*
+        Grabs movie trailer
+         */
         Intent i = new Intent(this.getApplicationContext(), MovieTrailerActivity.class);
         int id = getIntent().getExtras().getInt("id");
         i.putExtra("id", id);

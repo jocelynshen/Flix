@@ -30,20 +30,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     Config config;
     public static Context context;
 
-    public Config getConfig() {
-        return config;
+    public MovieAdapter(ArrayList<Movie> movies) {
+        this.movies = movies;
     }
 
     public void setConfig(Config config) {
         this.config = config;
     }
 
-    public MovieAdapter(ArrayList<Movie> movies) {
-        this.movies = movies;
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
         @BindView(R.id.tvTitle) TextView tvTitle;
         @BindView(R.id.tvOverview) TextView tvOverview;
         @Nullable @BindView(R.id.ivBackdropImage) ImageView ivBackdropImage;

@@ -11,12 +11,11 @@ public class Config {
 
     public Config(JSONObject object) throws JSONException {
         JSONObject images = object.getJSONObject("images");
-        imageBaseUrl = images.getString("secure_base_url");
+        imageBaseUrl = images.getString("secure_base_url"); // grab movie poster image url
         JSONArray posterSizeOptions = images.getJSONArray("poster_sizes");
-        posterSize = posterSizeOptions.optString(3, "w342");
+        posterSize = posterSizeOptions.optString(3, "w342"); // grab movie poster size
         JSONArray backdropSizeOptions = images.getJSONArray("backdrop_sizes");
-        backdropSize = backdropSizeOptions.optString(1, "w780");
-
+        backdropSize = backdropSizeOptions.optString(1, "w780"); // grab movie backdrop size
     }
 
     public String getBackdropSize() {

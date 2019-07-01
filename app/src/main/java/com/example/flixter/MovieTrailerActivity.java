@@ -37,10 +37,11 @@ public class MovieTrailerActivity extends YouTubeBaseActivity {
     }
 
     private void getMovieTrailer(){
-        // create url
+        /*
+        Grabs movie trailer using API
+         */
         int movieId = getIntent().getExtras().getInt("id");
         String url = API_BASE_URL + "/movie/" + movieId + "/videos";
-        // set request parameters
         RequestParams params = new RequestParams();
         params.put(API_KEY_PARAM, getString(R.string.api_key));
         client.get(url, params, new JsonHttpResponseHandler(){
@@ -60,40 +61,29 @@ public class MovieTrailerActivity extends YouTubeBaseActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
-                logErrorMethod("Failed to get YouTube trailer", throwable, true);
             }
         });
     }
 
     private void playVideo(){
-        YouTubePlayerView playerView = (YouTubePlayerView) findViewById(R.id.player);
-
-        // initialize with API key stored in secrets.xml
+        YouTubePlayerView playerView = findViewById(R.id.player);
         playerView.initialize(getString(R.string.youtube_api_key), new YouTubePlayer.OnInitializedListener() {
             @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider,
-                                                YouTubePlayer youTubePlayer, boolean b) {
-                // do any work here to cue video, play video, etc.
-                System.out.println("VIDEO ID");
-                System.out.println(videoId);
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 youTubePlayer.cueVideo(videoId);
             }
 
             @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider,
-                                                YouTubeInitializationResult youTubeInitializationResult) {
-                // log the error
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
                 Log.e("MovieTrailerActivity", "Error initializing YouTube player");
             }
         });
     }
 
     private void logErrorMethod(String message, Throwable error, boolean alertUser){
-        // always log error
         Log.e(TAG, message, error);
         if (alertUser){
             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }
-
     }
 }
